@@ -1,0 +1,8 @@
+sshfs ccsplta@blogs.ucl.ac.uk:/ /home/sammy/ucl/wordpress_live
+fusermount -u /home/sammy/ucl/wordpress_live                                                                   
+
+sshfs ccsplta@webapps-dev.ucl.ac.uk:/ ~/ucl/maharadev
+
+sshfs ccsplta@webapps-dev.ucl.ac.uk:/ ~/ucl/maharadev
+
+ssh ccsplta@wwwapps-dev.ucl.ac.uk:/ ~/ucl/maharadev

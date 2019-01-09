@@ -1,0 +1,4 @@
+moodle-readonly:
+php ~/moosh/moosh.php info-plugins
+php ~/moosh/moosh.php plugins-list
+php ~/moosh/moosh.php plugin-install adaptivequiz 2.6

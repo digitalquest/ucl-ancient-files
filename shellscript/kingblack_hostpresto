@@ -1,0 +1,3 @@
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/bushin_rsa
+ssh -p 4873 kingblac@91.238.165.2

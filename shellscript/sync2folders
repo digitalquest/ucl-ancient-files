@@ -1,0 +1,4 @@
+rsync -eah /data/www/moodledata admin@moodlex-staging.warwick.co.uk:/data/www/moodledata
+
+rsync -eah /data/www/html admin@moodlex-staging.warwick.co.uk:/data/www/html
+

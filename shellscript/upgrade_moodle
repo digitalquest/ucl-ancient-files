@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# upgrade Moodle to given VERSION
+#
+VERSION=v3.0.2
+echo "Upgrade Moodle to $VERSION"
+#enable maintenance mode
+php ~/public_html/moodle/admin/cli/maintenance.php --enable
+#moosh maintenance-on
+#backup database
+cd ~/public_html
+#rm moodle-database-*.sql.gz #delete previous backup
+mysqldump -h localhost -u digitalq_moodl32 -p'90SlN5)e!P' -C -Q --create-options digitalq_moodl32 \
+| gzip > moodle-database-`date +"%d-%m-%y"`.sql.gz
+#backup code and delete directory
+cd ~/public_html \
+cp moodle/config.php . \
+&& tar cvzf moodle.`date +"%d-%m-%y"`.tar.gz moodle \
+&& rm -rf moodle
+## begin get new version
+wget -c https://github.com/moodle/moodle/archive/$VERSION.tar.gz \
+&& tar xvf $VERSION.tar.gz \
+&& rm $VERSION.tar.gz \
+&& mv moodle-${VERSION:1} moodle \
+&& mv config.php moodle
+## end get new version
+#disable maintenance mode
+php ~/public_html/moodle/admin/cli/maintenance.php --disable
+#moosh maintenance-off
+#
+#finish the ugrade
+php ~/public_html/moodle/admin/cli/upgrade.php --non-interactive
+echo 'ALL DONE!'

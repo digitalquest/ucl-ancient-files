@@ -1,0 +1,48 @@
+Host *
+    Compression yes
+
+Host *.ucl.ac.uk
+    IdentityFile ~/.ssh/ucl_desktop.pub
+
+Host moodledev
+    User ccspmdd
+    Hostname moodle-dev.ucl.ac.uk
+    ForwardAgent yes
+ 
+Host moodleuat
+    User ccspmdu
+    Hostname moodle-uat.ucl.ac.uk
+ 
+Host d e f admin pp-a pp-b pp-c admin-pp
+    User ccspmdl
+    Hostname moodle-%h.ucl.ac.uk
+  
+Host moodle-db-a moodle-db-b moodle-pp-db
+    User ccspsql
+    Hostname %h.ucl.ac.uk
+ 
+Host wwwapps-a wwwapps-uat wwwapps-dev
+    User ccsplta
+    Hostname %h.ucl.ac.uk
+    Port 22
+    ProxyCommand ssh -q -W %h:%p moodledev
+
+Host wwwapps-db
+    User ccspsql
+    Hostname %h.ucl.ac.uk
+    Port 22
+    ProxyCommand ssh -q -W %h:%p moodledev
+
+Host webappsvm-a webappsvm-b webapps-uat webapps-dev
+    User ccsplta
+    Hostname %h.ucl.ac.uk
+
+Host webapps-db
+    HostName %h.ucl.ac.uk
+    User ccspsql
+
+Host tunnel
+    HostName webaps-db.ucl.ac.uk
+    User ccspsql
+    LocalForward 3310 localhost:3306
+    #need to type 'ssh -f -N tunnel' on the command line
